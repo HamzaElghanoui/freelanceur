@@ -52,6 +52,10 @@ class ProjectController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $project->setUser($user);
+            $file = $project->getImage()->getUrl();
+            $fileName = $file->getClientOriginalName().'.'.$file->guessExtension();
+            $project->getImage()->setUrl($fileName);
+            $file->move($this->getParameter('uploads_directory'),$fileName);
             $em->persist($project);
             $em->flush();
 

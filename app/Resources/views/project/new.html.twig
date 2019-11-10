@@ -17,7 +17,7 @@
             {{ form_row(form.price, {'required':false, 'attr': { 'class': 'form-control' }}) }}
         </div>
         <div class="form-group  {% if form.image.url.vars.errors | length > 0 %} has-error {% endif %}">
-            {{ form_row(form.image.url, {'required':false, 'attr': { 'class': 'form-control' }}) }}
+            {{ form_row(form.image.url, {'required':false, 'attr': { 'class': 'form-control-file' }}) }}
         </div>
         <div class="form-group  {% if form.image.alt.vars.errors | length > 0 %} has-error {% endif %}">
             {{ form_row(form.image.alt, {'required':false, 'attr': { 'class': 'form-control' }}) }}
