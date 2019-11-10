@@ -1,0 +1,35 @@
+
+{% extends "AppBundle::base.html.twig" %}
+
+{% block body %}
+    <h1>Skills list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for skill in skills %}
+            <tr>
+                <td><a href="{{ path('skill_show', { 'id': skill.id }) }}">{{ skill.id }}</a></td>
+                <td>{{ skill.name }}</td>
+                <td>
+                            <a href="{{ path('skill_show', { 'id': skill.id }) }}" class="btn btn-primary" role="button">Afficher</a> 
+                            <a href="{{ path('skill_edit', { 'id': skill.id }) }}" class="btn btn-warning" role="button">Editer</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('skill_new') }}">Create a new skill</a>
+        </li>
+    </ul>
+{% endblock %}

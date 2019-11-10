@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+{# <link rel="stylesheet" href="{{ asset('front/bootstrap.min.css') }}" > #}
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" >
+{% block stylesheet %}{% endblock %}
+</head>
+
+<body>
+    {% include("@App/Partial/menu.html.twig") %}
+    <div class="container">
+        {# {{ include('category/alert.html.twig') }} #}
+        {% block body %} 
+        
+        {% endblock %}
+    </div>
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    {% block footer %} 
+
+    {% endblock %}
+</body>
+
+</html>

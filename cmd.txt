@@ -1,0 +1,22 @@
+
+php bin/console doctrine:database:create
+php bin/console doctrine:generate:entity
+php bin/console doctrine:generate:entities PostBundle
+php bin/console doctrine:schema:update --dump-sql
+php bin/console doctrine:schema:update --force
+php bin/console doctrine:generate:form PostBundle:Post
+php bin/console cache:clear
+php bin/console doctrine:generate:crud
+composer require symfony/web-server-bundle --dev
+
+when create new
+
+init
+$ composer install
+enter db infos and app_id and app_secret
+
+$ bin/console doctrine:database:create
+
+$ bin/console doctrine:schema:update --force
+
+$ bin/console server:start
