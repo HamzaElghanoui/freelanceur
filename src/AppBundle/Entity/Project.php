@@ -53,6 +53,11 @@ class Project
     private $skills;
 
     /**
+     * @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+     */
+    private $image;
+
+    /**
      * Get id
      *
      * @return int
@@ -197,5 +202,29 @@ class Project
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Project
+     */
+    public function setImage(\AppBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

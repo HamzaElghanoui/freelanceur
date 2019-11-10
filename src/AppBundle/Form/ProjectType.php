@@ -2,10 +2,13 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Form\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class ProjectType extends AbstractType
 {
@@ -18,6 +21,7 @@ class ProjectType extends AbstractType
         ->add('name')
         ->add('description')
         ->add('price')
+        ->add('image',ImageType::class)
         ->add('skills',EntityType::class, array(
             'class' => 'AppBundle:Skill',
             'choice_label' => 'name',
