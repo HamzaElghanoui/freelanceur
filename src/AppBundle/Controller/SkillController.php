@@ -48,6 +48,9 @@ class SkillController extends Controller
             $em->persist($skill);
             $em->flush();
 
+            $request->getSession()->getFlashBag()->add('success', 'Post a ete added');
+
+
             return $this->redirectToRoute('skill_show', array('id' => $skill->getId()));
         }
 
@@ -87,6 +90,8 @@ class SkillController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'category a ete edited');
+            
 
             return $this->redirectToRoute('skill_edit', array('id' => $skill->getId()));
         }
@@ -113,6 +118,8 @@ class SkillController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($skill);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'category a ete deleted');
+
         }
 
         return $this->redirectToRoute('skill_index');

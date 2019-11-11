@@ -28,8 +28,9 @@ class ProjectController extends Controller
         // var_dump($routeName);
         // die();
         $em = $this->getDoctrine()->getManager();
+        $userid = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
-        $projects = $em->getRepository('AppBundle:Project')->findAll();
+        $projects = $em->getRepository('AppBundle:Project')->findBy(array('user'=> $userid));
 
         return $this->render('project/index.html.twig', array(
             'projects' => $projects,
@@ -58,6 +59,7 @@ class ProjectController extends Controller
             $file->move($this->getParameter('uploads_directory'),$fileName);
             $em->persist($project);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Post a ete ajouter');
 
             return $this->redirectToRoute('project_show', array('id' => $project->getId()));
         }
@@ -98,6 +100,8 @@ class ProjectController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Post a ete editer');
+
 
             return $this->redirectToRoute('project_edit', array('id' => $project->getId()));
         }
@@ -124,6 +128,8 @@ class ProjectController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($project);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Post a ete deleted');
+
         }
 
         return $this->redirectToRoute('project_index');

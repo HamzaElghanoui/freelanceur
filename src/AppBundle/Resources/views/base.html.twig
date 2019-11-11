@@ -10,6 +10,7 @@
 
 <body>
     {% include("@App/Partial/menu.html.twig") %}
+    {{ include('AppBundle:Partial:alert.html.twig') }}
     <div class="container">
         {# {{ include('category/alert.html.twig') }} #}
         {% block body %} 

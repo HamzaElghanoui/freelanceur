@@ -8,6 +8,7 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+            {{ include('AppBundle:Partial:alert.html.twig') }}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
