@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Project
@@ -54,6 +56,7 @@ class Project
 
     /**
      * @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+     * @Assert\NotBlank(groups={"new"})
      */
     private $image;
 

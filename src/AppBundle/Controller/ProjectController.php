@@ -47,7 +47,7 @@ class ProjectController extends Controller
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $project = new Project();
-        $form = $this->createForm('AppBundle\Form\ProjectType', $project);
+        $form = $this->createForm('AppBundle\Form\ProjectType', $project,array('validation_groups' => array('new')));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
