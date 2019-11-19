@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Project;
 use AppBundle\Form\ImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -94,6 +95,7 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
+        $oldImage = $project->getImage()->getUrl();
         $deleteForm = $this->createDeleteForm($project);
         $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
@@ -101,7 +103,20 @@ class ProjectController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $request->getSession()->getFlashBag()->add('success', 'Post a ete editer');
+            $file = $project->getImage()->getUrl();
+            if(!empty($file)){
+                $em = $this->getDoctrine()->getManager();
 
+                $fileName = $file->getClientOriginalName() . '.' . $file->guessExtension();
+                $project->getImage()->setUrl($fileName);
+                $file->move($this->getParameter('uploads_directory'),$fileName);
+                $em->persist($project);
+                $this->getDoctrine()->getManager()->flush();
+
+                // $file->move($this->getParameter('uploads_category'),$fileName);
+            } else {
+                $project->getImage->setUrl($oldImage);
+            }
 
             return $this->redirectToRoute('project_edit', array('id' => $project->getId()));
         }

@@ -21,9 +21,7 @@ class ProjectType extends AbstractType
         ->add('name')
         ->add('description')
         ->add('price')
-        ->add('image',ImageType::class,array(
-            'data_class'=> null
-        ))
+        ->add('image',ImageType::class)
         ->add('skills',EntityType::class, array(
             'class' => 'AppBundle:Skill',
             'choice_label' => 'name',
