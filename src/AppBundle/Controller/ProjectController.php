@@ -32,9 +32,18 @@ class ProjectController extends Controller
         $userid = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         $projects = $em->getRepository('AppBundle:Project')->findBy(array('user'=> $userid));
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $projects,
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+    
+        // parameters to template
+        // return $this->render('article/list.html.twig', ['pagination' => $pagination]);
 
         return $this->render('project/index.html.twig', array(
-            'projects' => $projects,
+            'projects' => $pagination,
         ));
     }
 

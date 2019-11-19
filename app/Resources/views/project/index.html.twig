@@ -3,7 +3,9 @@
 
 {% block body %}
     <h1>Projects list</h1>
-
+    <div class="count">
+        {{ projects.getTotalItemCount }}
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -33,7 +35,10 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(projects) }}
+    </div>
     <ul>
         <li>
             <a href="{{ path('project_new') }}">Create a new project</a>
