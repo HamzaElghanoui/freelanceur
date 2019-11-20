@@ -1,0 +1,3 @@
+sonata_block:
+    default_contexts: [sonata_page_bundle]
+    blocks:
