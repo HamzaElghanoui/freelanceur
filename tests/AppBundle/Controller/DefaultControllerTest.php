@@ -2,17 +2,23 @@
 
 namespace Tests\AppBundle\Controller;
 
+use AppBundle\Tests\Calculator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 
 class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()
     {
-        $client = static::createClient();
+        $calculator = new Calculator;
+        $sum = $calculator->add(2,3);
+        $this->assertEquals($sum, 5);
+        // $this->assertTrue(true);
+        // $this->assertFalse(false);
+    }
 
-        $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+    public function testEdit(){
+        $this->assertFalse(false);
     }
 }
